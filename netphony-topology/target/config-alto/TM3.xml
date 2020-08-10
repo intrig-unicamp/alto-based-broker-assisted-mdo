@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <managementIP>localhost</managementIP>
+    <managementPort>5003</managementPort>
+
+    <XML>
+        <mode>TM</mode>
+        <XMLFileTopology>target/config-alto/network3.xml</XMLFileTopology>
+        <Identifier>3.3.3.3</Identifier>>
+    </XML>
+     <InitFrom>
+        <Init>initFromXML</Init>
+    </InitFrom>
+    <!--WSOld>
+	<ip>localhost</ip>
+	<port>9876</port>
+    </WSOld-->
+    <UNIFY>
+        <serve_port>8089</serve_port>
+    </UNIFY>
+    <!--BGPLS>
+        <Reader>True</Reader>
+        <Writer>True</Writer>
+        <BGPLSconfigFile>target/conf1wayTest/BGPLS3.xml</BGPLSconfigFile>
+    </BGPLS-->
+
+    <alto>
+	<server>
+	    <serverIP>http://127.0.0.1</serverIP>
+            <serverPort>8181</serverPort>
+        </server>
+
+	<networkMap>
+	    <url>/networkmap</url> 	
+            <contentType>application/alto-networkmap+json</contentType> 	
+	    <name>my-default-network-map</name>	
+	</networkMap>
+    </alto>
+   
+</config>

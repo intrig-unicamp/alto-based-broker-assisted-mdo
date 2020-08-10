@@ -1,0 +1,281 @@
+version: "3"
+services:
+  neo4j:
+    build: ../../docker-neo4j/3.1.3/community
+    networks:
+      net-broker:
+        ipv4_address: 172.28.0.30
+
+  tads1:
+    build: ../../netphony-topology
+    networks:
+      net-mdo1:
+        ipv4_address: 172.25.0.20    
+      net-broker:
+        ipv4_address: 172.28.0.3
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM1.xml
+
+  tads2:
+    build: ../../netphony-topology
+    networks:
+      net-mdo2:
+        ipv4_address: 172.26.0.20 
+      net-broker:
+        ipv4_address: 172.28.0.4   
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM2.xml
+
+  tads3:
+    build: ../../netphony-topology
+    networks:
+      net-mdo3:
+        ipv4_address: 172.27.0.20
+      net-broker:
+        ipv4_address: 172.28.0.5     
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM3.xml
+
+  tads-td121:
+    build: ../../netphony-topology
+    networks:
+      net-td121:
+        ipv4_address: 172.50.0.20    
+      net-broker:
+        ipv4_address: 172.28.0.6
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM-TD121.xml
+
+  tads-td122:
+    build: ../../netphony-topology
+    networks:
+      net-td122:
+        ipv4_address: 172.51.0.20    
+      net-broker:
+        ipv4_address: 172.28.0.7
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM-TD122.xml
+
+  tads-td123:
+    build: ../../netphony-topology
+    networks:
+      net-td123:
+        ipv4_address: 172.52.0.20    
+      net-broker:
+        ipv4_address: 172.28.0.8
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM-TD123.xml
+
+  tads-td231:
+    build: ../../netphony-topology
+    networks:
+      net-td231:
+        ipv4_address: 172.53.0.20    
+      net-broker:
+        ipv4_address: 172.28.0.9
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM-TD231.xml
+
+  inter-domain-topo:
+    build: ../../inter-domain-topo-module
+    networks:
+      net-broker:
+        ipv4_address: 172.28.0.20 
+      net-mdo1:
+        ipv4_address: 172.25.0.4
+      net-mdo2:
+        ipv4_address: 172.26.0.2
+      net-mdo3:
+        ipv4_address: 172.27.0.2
+      net-td121:
+        ipv4_address: 172.50.0.2
+      net-td122:
+        ipv4_address: 172.51.0.2
+      net-td123:
+        ipv4_address: 172.52.0.2
+      net-td231:
+        ipv4_address: 172.53.0.2
+    entrypoint: ./target/wait-for-it.sh 172.28.0.30:7474 -t 0 -- java -jar ./target/inter-domain-topo-module-1.0-shaded.jar ./target/config-docker.xml
+    depends_on:
+      - tads1
+      - tads2
+      - tads3
+      - tads-td121    
+      - tads-td122
+      - tads-td123
+      - tads-td231
+      - neo4j
+
+  topology-map:
+    build: ../../topology-map-module
+    networks:
+      net-broker:
+        ipv4_address: 172.28.0.11       
+    entrypoint: ./target/wait-for-it.sh 172.28.0.20:8088 -t 0 -- java -jar ./target/topology-map-module-1.0-shaded.jar ./target/config-docker.xml
+    depends_on:
+      - inter-domain-topo
+
+  ro-escape2:
+    build: ../../escape
+    networks:
+      net-mdo2:
+        ipv4_address: 172.26.0.10  
+      net-mdo1:
+        ipv4_address: 172.25.0.2
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-ad2.config
+    #entrypoint: python escape.py --debug --rosapi -4 --config config/escape-static-dummy.config
+    depends_on:
+      - topology-map
+
+  ro-escape3:
+    build: ../../escape
+    networks:
+      net-mdo3:
+        ipv4_address: 172.27.0.10
+      net-mdo1:
+        ipv4_address: 172.25.0.3 
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-ad3.config
+    #entrypoint: python escape.py --debug --rosapi -4 --config config/escape-static-dummy.config
+    depends_on:
+      - topology-map
+
+  ro-escape-td121:
+    build: ../../escape
+    networks:
+      net-td121:
+        ipv4_address: 172.50.0.10
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-td121.config
+    depends_on:
+      - topology-map
+
+  ro-escape-td122:
+    build: ../../escape
+    networks:
+      net-td122:
+        ipv4_address: 172.51.0.10
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-td122.config
+    depends_on:
+      - topology-map
+
+  ro-escape-td123:
+    build: ../../escape
+    networks:
+      net-td123:
+        ipv4_address: 172.52.0.10
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-td123.config
+    depends_on:
+      - topology-map
+
+  ro-escape-td231:
+    build: ../../escape
+    networks:
+      net-td231:
+        ipv4_address: 172.53.0.10
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-td231.config
+    depends_on:
+      - topology-map
+
+  ro-escape1:
+    build: ../../escape
+    networks:
+      net-mdo1:
+        ipv4_address: 172.25.0.10 
+      net-mdo2:
+        ipv4_address: 172.26.0.3
+      net-mdo3:
+        ipv4_address: 172.27.0.3
+      net-broker:
+        ipv4_address: 172.28.0.2  
+    entrypoint: python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-ad1.config
+    #entrypoint: ./wait-for-it.sh 172.28.0.20:8088 -t 0 -- python escape.py --debug --rosapi -4 --config config/alto/test3/escape-static-dummy-ad1.config
+    #entrypoint: ./wait-for-it.sh 172.28.0.10:8181 -t 0 -- python escape.py --debug --rosapi -4 --config config/escape-bgp-ls-test.config
+    depends_on:
+      - topology-map
+
+  inter-domain-resource:
+    build: ../../inter-domain-resource-module
+    networks:
+      net-broker:
+        ipv4_address: 172.28.0.21 
+      net-mdo1:
+        ipv4_address: 172.25.0.5
+      net-mdo2:
+        ipv4_address: 172.26.0.4
+      net-mdo3:
+        ipv4_address: 172.27.0.4
+      net-td121:
+        ipv4_address: 172.50.0.4
+      net-td122:
+        ipv4_address: 172.51.0.4
+      net-td123:
+        ipv4_address: 172.52.0.4
+      net-td231:
+        ipv4_address: 172.53.0.4
+    entrypoint: ./wait-for-it.sh 172.28.0.20:8088 -t 0 -- python resource-module.py 172.28.0.20:8088 172.28.0.21 8181 10
+    depends_on:
+      - ro-escape2
+      - ro-escape3
+      - ro-escape1
+      - ro-escape-td121
+      - ro-escape-td122
+      - ro-escape-td123
+      - ro-escape-td231
+
+  map-service:
+    build: ../../map-service-module
+    networks:
+      net-broker:
+        ipv4_address: 172.28.0.10       
+    entrypoint: ./target/wait-for-it.sh 172.28.0.21:8181 -t 0 -- java -jar ./target/map-service-module-1.0-shaded.jar ./target/config-docker.xml
+    depends_on:
+      - inter-domain-resource
+
+networks:
+  net-mdo1:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+
+  net-mdo2:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.26.0.0/16
+
+  net-mdo3:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.0.0/16
+
+  net-broker:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+
+  net-td121:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.50.0.0/16
+
+  net-td122:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.51.0.0/16
+
+  net-td123:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.52.0.0/16
+
+  net-td231:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.53.0.0/16

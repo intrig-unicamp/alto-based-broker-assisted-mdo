@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tads>
+		<server>
+		    <identifier>0.0.0.1</identifier>
+			<serverIP>http://172.25.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>
+		<server>
+		    <identifier>0.0.0.2</identifier>  
+			<serverIP>http://172.26.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>
+		<server>
+		    <identifier>0.0.0.3</identifier>
+			<serverIP>http://172.27.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>		
+
+		<server>
+		    <identifier>0.0.0.121</identifier>
+			<serverIP>http://172.50.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>		
+		<server>
+		    <identifier>0.0.0.122</identifier>
+			<serverIP>http://172.51.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>		
+		<server>
+		    <identifier>0.0.0.123</identifier>
+			<serverIP>http://172.52.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>		
+		<server>
+		    <identifier>0.0.0.231</identifier>
+			<serverIP>http://172.53.0.20</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>		
+
+	</tads>
+
+	<UNIFY>
+		<Export>
+			<serverPort>8088</serverPort>
+		</Export>
+	</UNIFY>
+</config>

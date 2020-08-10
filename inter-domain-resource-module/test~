@@ -1,0 +1,16 @@
+0.248032808304
+MATCH (node1:DOMAIN {id:'0.0.0.3'}) MATCH (node2 {id:'0000000000000001@RYU'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.3'}) MATCH (node2 {id:'DOCKER_HOST@DOCKER-1'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.3'}) MATCH (node2 {id:'DOCKER_HOST@DOCKER-2'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.3'}) MATCH (node2 {id:'SingleBiSBiS@MININET'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.3'}) MATCH (node2 {id:'UUID-OpenStack-01-pack@OPENSTACK'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.3'}) MATCH (node2 {id:'UUID-UniversalNode-01@UN'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+0.268785953522
+MATCH (node1:DOMAIN {id:'0.0.0.2'}) MATCH (node2 {id:'0000000000000001@RYU'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.2'}) MATCH (node2 {id:'DOCKER_HOST@DOCKER-1'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.2'}) MATCH (node2 {id:'DOCKER_HOST@DOCKER-2'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.2'}) MATCH (node2 {id:'SingleBiSBiS@MININET'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.2'}) MATCH (node2 {id:'UUID-OpenStack-01-pack@OPENSTACK'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+MATCH (node1:DOMAIN {id:'0.0.0.2'}) MATCH (node2 {id:'UUID-UniversalNode-01@UN'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)
+0.00115704536438
+MATCH (node1:DOMAIN {id:'0.0.0.1'}) MATCH (node2 {id:'SingleBiSBiS'}) CREATE UNIQUE (node1)-[rel1:hasNode]->(node2)

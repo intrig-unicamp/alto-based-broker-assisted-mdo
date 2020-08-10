@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>        
+    <MapPlugin>
+	<MapPluginDB>
+	    <serverIP>bolt://172.28.0.30</serverIP>
+            <serverPort>7687</serverPort>
+
+	    <propertyMap>	        
+	        <name>my-default-property-map</name>		
+	    </propertyMap>
+        </MapPluginDB>
+
+	<InterDomainResourceDB>
+	    <serverIP>bolt://172.28.0.30</serverIP>
+            <serverPort>7687</serverPort>
+        </InterDomainResourceDB>	
+    </MapPlugin>
+
+    <Map>
+	<server>
+            <serverPort>8181</serverPort>
+        </server>
+
+        <MapDB>
+	    <serverIP>bolt://172.28.0.30</serverIP>
+            <serverPort>7687</serverPort>
+        </MapDB>
+    </Map>
+
+    <UNIFY>
+        <Export> 
+            <serverPort>8090</serverPort>
+        </Export>
+
+        <AltoServer>
+	    <serverIP>http://172.28.0.10</serverIP>
+            <serverPort>8181</serverPort>
+        </AltoServer>
+
+        <networkMap>
+	    <url>/networkmap</url> 	
+            <contentType>application/alto-networkmap+json</contentType> 	
+	    <name>my-default-network-map</name>		
+	</networkMap>
+    </UNIFY>       
+</config>

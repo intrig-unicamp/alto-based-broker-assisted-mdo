@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tads>
+		<server>
+		    <identifier>0.0.0.1</identifier>
+			<serverIP>http://172.28.0.3</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>
+		<server>
+		    <identifier>0.0.0.2</identifier>  
+			<serverIP>http://172.28.0.4</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>
+		<server>
+		    <identifier>0.0.0.3</identifier>
+			<serverIP>http://172.28.0.5</serverIP>
+			<serverPort>8088</serverPort>
+			<rest>topologyFromTADS</rest>
+		</server>		
+	</tads>
+
+	<UNIFY>
+		<Export>
+			<serverPort>8088</serverPort>
+		</Export>
+	</UNIFY>
+</config>

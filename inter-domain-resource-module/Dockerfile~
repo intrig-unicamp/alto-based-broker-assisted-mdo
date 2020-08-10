@@ -1,0 +1,16 @@
+################################################################################
+# Dockerfile to build minimal ESCAPE MdO Container
+################################################################################
+FROM python:2.7.13
+MAINTAINER Janos Czentye <czentye@tmit.bme.hu>
+ARG GIT_REVISION=unknown
+LABEL git-revision=$GIT_REVISION    
+LABEL Description="ESCAPE" Project="5GEx" version="2.0.0+"
+WORKDIR /opt/escape
+COPY . ./
+RUN apt-get install git
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+EXPOSE 8008 8888
+ENV PYTHONUNBUFFERED 1
+#####ENTRYPOINT ["python", "escape.py"]
+#####CMD ["--debug", "--rosapi", "--config", "config/escape-static-dummy.config"]

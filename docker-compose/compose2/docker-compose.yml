@@ -1,0 +1,124 @@
+version: "3"
+services:
+  neo4j:
+    build: ../../docker-neo4j/3.1.3/community
+    networks:
+      net-alto:
+        ipv4_address: 172.28.0.30
+
+  tads1:
+    build: ../../netphony-topology
+    networks:
+      net-mdo1:
+        ipv4_address: 172.25.0.20
+      net-alto:
+        ipv4_address: 172.28.0.3
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM1.xml
+
+  tads2:
+    build: ../../netphony-topology
+    networks:
+      net-mdo2:
+        ipv4_address: 172.26.0.20
+      net-alto:
+        ipv4_address: 172.28.0.4
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM2.xml
+
+  tads3:
+    build: ../../netphony-topology
+    networks:
+      net-mdo3:
+        ipv4_address: 172.27.0.20
+      net-alto:
+        ipv4_address: 172.28.0.5
+    entrypoint: java -Dlog4j.configurationFile=target/log4j2.xml -jar target/topology-1.3.3-shaded.jar target/config-alto-docker/TM3.xml
+
+  aggregator:
+    build: ../../alto-aggregator-module
+    networks:
+      net-alto:
+        ipv4_address: 172.28.0.20
+      net-mdo1:
+        ipv4_address: 172.25.0.4
+      net-mdo2:
+        ipv4_address: 172.26.0.2
+      net-mdo3:
+        ipv4_address: 172.27.0.2
+    entrypoint: ./target/wait-for-it.sh 172.28.0.30:7474 -t 0 -- java -jar ./target/alto-aggregator-module-1.0-shaded.jar ./target/config-docker.xml
+    depends_on:
+      - tads1
+      - tads2
+      - tads3
+      - neo4j
+
+  alto:
+    build: ../../alto-module
+    networks:
+      net-alto:
+        ipv4_address: 172.28.0.10
+    entrypoint: ./target/wait-for-it.sh 172.28.0.30:7474 -t 0 -- java -jar ./target/alto-module-1.0-shaded.jar ./target/config-docker.xml
+    depends_on:
+      - aggregator
+
+  ro-escape2:
+    build: ../../escape
+    networks:
+      net-mdo2:
+        ipv4_address: 172.26.0.10
+      net-mdo1:
+        ipv4_address: 172.25.0.2
+    entrypoint: python escape.py --debug --rosapi --config config/alto/test2/escape-static-dummy2.config
+
+  ro-escape3:
+    build: ../../escape
+    networks:
+      net-mdo3:
+        ipv4_address: 172.27.0.10
+      net-mdo1:
+        ipv4_address: 172.25.0.3
+    entrypoint: python escape.py --debug --rosapi --config config/alto/test2/escape-static-dummy3.config
+
+  ro-escape1:
+    build: ../../escape
+    networks:
+      net-mdo1:
+        ipv4_address: 172.25.0.10
+      net-mdo2:
+        ipv4_address: 172.26.0.3
+      net-mdo3:
+        ipv4_address: 172.27.0.3
+      net-alto:
+        ipv4_address: 172.28.0.2
+    #entrypoint: ./wait-for-it.sh 172.28.0.10:8181 -t 0 -- python escape.py --debug --rosapi --config config/alto/test2/escape-bgp-ls-test.config -s examples/alto/escape-mn-req2.nffg
+    entrypoint: ./wait-for-it.sh 172.28.0.10:8181 -t 0 -- python escape.py --debug --rosapi --config config/alto/escape-mn-topo-global.config
+    depends_on:
+      - aggregator
+
+networks:
+  net-mdo1:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+
+  net-mdo2:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.26.0.0/16
+
+  net-mdo3:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.0.0/16
+
+  net-alto:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

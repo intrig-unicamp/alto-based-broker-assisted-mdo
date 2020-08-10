@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <InterDomainTopo>
+        <server>
+            <serverIP>http://172.28.0.20</serverIP>
+            <serverPort>8088</serverPort>
+	    <rest>topologyFromTADS</rest> 	
+	</server>	
+	
+	<TopologyMapDB>
+	    <serverIP>bolt://172.28.0.30</serverIP>
+            <serverPort>7687</serverPort>
+        </TopologyMapDB>	
+    </InterDomainTopo>        	
+</config>

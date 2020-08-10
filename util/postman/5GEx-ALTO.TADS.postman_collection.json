@@ -1,0 +1,286 @@
+{
+	"variables": [],
+	"info": {
+		"name": "5GEx/ALTO.TADS",
+		"_postman_id": "8ab7d561-73b8-c146-78c8-e498d337d07f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ALTO (172.28.0.0/16)",
+			"description": "",
+			"item": [
+				{
+					"name": "ALTO-Server/NetworkMap",
+					"request": {
+						"url": "http://172.28.0.10:8181/controller/nb/v2/alto/networkmap/my-default-network-map",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/alto-networkmap+json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MdO1 (172.25.0.0/16)",
+			"description": "",
+			"item": [
+				{
+					"name": "RO-ESCAPE/get-config",
+					"request": {
+						"url": "http://172.25.0.10:8888/escape/get-config",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TADS/topologyFromTADS",
+					"request": {
+						"url": "http://172.25.0.20:8088/restconf/data/topologyFromTADS/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "3e6a00b6-539f-4feb-9eaf-07d90b0f2fed",
+							"name": "8087",
+							"originalRequest": {
+								"url": "http://localhost:8087/restconf/data/topologyFromTADS/",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 13 Mar 2017 13:27:59 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Jetty(9.3.z-SNAPSHOT)",
+									"description": "A name for the server"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 27,
+							"body": "{\"metadata\":[],\"nodes\":{\"node\":[{\"metadata\":[{\"key\":\"reachability_ipv4_address\",\"value\":\"172.16.102.0\"},{\"key\":\"reachability_prefix\",\"value\":\"24\"}],\"id\":\"0.0.0.2\",\"ports\":{\"port\":[{\"metadata\":[],\"id\":\"172.16.102.101\"},{\"metadata\":[],\"id\":\"172.16.102.102\"}]},\"links\":{\"link\":[]}},{\"metadata\":[{\"key\":\"5GEx_Entry_Point\",\"value\":\"https://openstack.5Gex.com/url\"},{\"key\":\"reachability_ipv4_address\",\"value\":\"172.16.101.0\"},{\"key\":\"reachability_prefix\",\"value\":\"24\"}],\"id\":\"0.0.0.1\",\"ports\":{\"port\":[{\"metadata\":[],\"id\":\"172.16.101.101\"},{\"metadata\":[],\"id\":\"172.16.101.102\"},{\"metadata\":[],\"id\":\"172.16.101.103\"},{\"metadata\":[],\"id\":\"172.16.101.104\"}]},\"links\":{\"link\":[{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"99\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"resources\":{\"delay\":\"99\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"3000\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"resources\":{\"delay\":\"3000\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"resources\":{\"delay\":\"1003\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"1003\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"323\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"resources\":{\"delay\":\"323\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"2232\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"2232\"}}]},\"resources\":{\"mem\":\"100Gbyte\",\"storage\":\"100Tbyte\",\"cpu\":\"100\"}}]},\"links\":{\"link\":[{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.2]/ports/port[id=172.16.102.101]\"},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.2]/ports/port[id=172.16.102.102]\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "TADS/topologyFromALTO",
+					"request": {
+						"url": "http://172.25.0.20:8088/restconf/data/topologyFromALTO/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MdO2 (172.26.0.0/16)",
+			"description": "",
+			"item": [
+				{
+					"name": "RO-ESCAPE/get-config",
+					"request": {
+						"url": "http://172.26.0.10:8888/escape/get-config",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TADS/topologyFromTADS",
+					"request": {
+						"url": "http://172.26.0.20:8088/restconf/data/topologyFromTADS/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "f80ba285-e711-47fa-9667-2a45ae029212",
+							"name": "8087",
+							"originalRequest": {
+								"url": "http://localhost:8087/restconf/data/topologyFromTADS/",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 13 Mar 2017 13:27:59 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Jetty(9.3.z-SNAPSHOT)",
+									"description": "A name for the server"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 27,
+							"body": "{\"metadata\":[],\"nodes\":{\"node\":[{\"metadata\":[{\"key\":\"reachability_ipv4_address\",\"value\":\"172.16.102.0\"},{\"key\":\"reachability_prefix\",\"value\":\"24\"}],\"id\":\"0.0.0.2\",\"ports\":{\"port\":[{\"metadata\":[],\"id\":\"172.16.102.101\"},{\"metadata\":[],\"id\":\"172.16.102.102\"}]},\"links\":{\"link\":[]}},{\"metadata\":[{\"key\":\"5GEx_Entry_Point\",\"value\":\"https://openstack.5Gex.com/url\"},{\"key\":\"reachability_ipv4_address\",\"value\":\"172.16.101.0\"},{\"key\":\"reachability_prefix\",\"value\":\"24\"}],\"id\":\"0.0.0.1\",\"ports\":{\"port\":[{\"metadata\":[],\"id\":\"172.16.101.101\"},{\"metadata\":[],\"id\":\"172.16.101.102\"},{\"metadata\":[],\"id\":\"172.16.101.103\"},{\"metadata\":[],\"id\":\"172.16.101.104\"}]},\"links\":{\"link\":[{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"99\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"resources\":{\"delay\":\"99\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"3000\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"resources\":{\"delay\":\"3000\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"resources\":{\"delay\":\"1003\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"1003\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"323\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"resources\":{\"delay\":\"323\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"2232\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"2232\"}}]},\"resources\":{\"mem\":\"100Gbyte\",\"storage\":\"100Tbyte\",\"cpu\":\"100\"}}]},\"links\":{\"link\":[{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.2]/ports/port[id=172.16.102.101]\"},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.2]/ports/port[id=172.16.102.102]\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "TADS/topologyFromALTO",
+					"request": {
+						"url": "http://172.26.0.20:8088/restconf/data/topologyFromALTO/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MdO3 (172.27.0.0/16)",
+			"description": "",
+			"item": [
+				{
+					"name": "RO-ESCAPE/get-config",
+					"request": {
+						"url": "http://172.27.0.10:8888/escape/get-config",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TADS/topologyFromTADS",
+					"request": {
+						"url": "http://172.27.0.20:8088/restconf/data/topologyFromTADS/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "494d70ea-6a6e-4089-9a4c-26f7621ab7f0",
+							"name": "8087",
+							"originalRequest": {
+								"url": "http://localhost:8087/restconf/data/topologyFromTADS/",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Mon, 13 Mar 2017 13:27:59 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Jetty(9.3.z-SNAPSHOT)",
+									"description": "A name for the server"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"responseTime": 27,
+							"body": "{\"metadata\":[],\"nodes\":{\"node\":[{\"metadata\":[{\"key\":\"reachability_ipv4_address\",\"value\":\"172.16.102.0\"},{\"key\":\"reachability_prefix\",\"value\":\"24\"}],\"id\":\"0.0.0.2\",\"ports\":{\"port\":[{\"metadata\":[],\"id\":\"172.16.102.101\"},{\"metadata\":[],\"id\":\"172.16.102.102\"}]},\"links\":{\"link\":[]}},{\"metadata\":[{\"key\":\"5GEx_Entry_Point\",\"value\":\"https://openstack.5Gex.com/url\"},{\"key\":\"reachability_ipv4_address\",\"value\":\"172.16.101.0\"},{\"key\":\"reachability_prefix\",\"value\":\"24\"}],\"id\":\"0.0.0.1\",\"ports\":{\"port\":[{\"metadata\":[],\"id\":\"172.16.101.101\"},{\"metadata\":[],\"id\":\"172.16.101.102\"},{\"metadata\":[],\"id\":\"172.16.101.103\"},{\"metadata\":[],\"id\":\"172.16.101.104\"}]},\"links\":{\"link\":[{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"99\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"resources\":{\"delay\":\"99\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"3000\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.101]\",\"resources\":{\"delay\":\"3000\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"resources\":{\"delay\":\"1003\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"1003\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"323\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"resources\":{\"delay\":\"323\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"resources\":{\"delay\":\"2232\"}},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.102]\",\"resources\":{\"delay\":\"2232\"}}]},\"resources\":{\"mem\":\"100Gbyte\",\"storage\":\"100Tbyte\",\"cpu\":\"100\"}}]},\"links\":{\"link\":[{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.104]\",\"dst\":\"/nodes/node[id=0.0.0.2]/ports/port[id=172.16.102.101]\"},{\"src\":\"/nodes/node[id=0.0.0.1]/ports/port[id=172.16.101.103]\",\"dst\":\"/nodes/node[id=0.0.0.2]/ports/port[id=172.16.102.102]\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "TADS/topologyFromALTO",
+					"request": {
+						"url": "http://172.27.0.20:8088/restconf/data/topologyFromALTO/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

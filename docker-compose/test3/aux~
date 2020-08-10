@@ -1,0 +1,16 @@
+
+
+
+  map-service:
+    build: ../../map-service-module
+    networks:
+      net-broker:
+        ipv4_address: 172.28.0.10       
+    entrypoint: ./target/wait-for-it.sh 172.28.0.30:7474 -t 0 -- java -jar ./target/map-service-module-1.0-shaded.jar ./target/config-docker.xml
+    depends_on:
+      - ro-escape2
+      - ro-escape3
+      - ro-escape1
+      - topology-map
+      #- inter-domain-resource
+
